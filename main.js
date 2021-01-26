@@ -181,8 +181,7 @@ function update(cell) {
         previousTurn[turn] = cell;    
         
         // Change turns
-        turn = turn == 'X' ? 'O' : 'X';
-
+        
         // Update board
         board[newRow][newColumn] = 1;
         
@@ -192,12 +191,18 @@ function update(cell) {
             $("body").css({
                 "overflow": "hidden"
             });
-            $("#winnertext").text(`Player ${gameOver[0] ? 'O' : 'X'} Won!`);
+            if (gameOver[0] === true && gameOver[1] === true) {
+                $("#winnertext").text(`Player ${turn} Won!`);;
+            } else {
+                $("#winnertext").text(`Player ${gameOver[0] ? 'O' : 'X'} Won!`);
+            }
             $(".modal").css({
                 "display": "block"
             });
         }        
-    
+
+        turn = turn == 'X' ? 'O' : 'X';
+
     } else {
         $(".alert").text("Invalid move!")
     }
